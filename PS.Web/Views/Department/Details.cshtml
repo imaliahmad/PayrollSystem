@@ -1,0 +1,57 @@
+﻿@model PS.BOL.Department
+@{
+    ViewData["Title"] = "CreateorEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/department/department-create-edit.css" rel="stylesheet"/>
+
+<div class="container">
+    <br />
+   
+    <h1 class="text-center">Departmment Detail</h1>
+    <br />
+   <div>
+        <script>
+           function goBack() {
+              window.location.href='/Department';
+           }
+        </script>
+        <button type="button" class="btn btn-success" onclick="goBack()">Back To List</button>
+
+   </div>
+   <br />
+   <hr />
+   <div class="row">
+    <div class="col-md-4">
+      <form asp-action="CreateorEdit">
+        <input type="hidden" asp-for="DeptId" />
+        <div class="row row-1">
+            <div class="col-md-2">
+             <label asp-for="DeptName" class="control-label"></label>
+            </div>
+            <div class="col-md-6">
+               <input asp-for="DeptName"disabled class="form-control" />
+               <span asp-validation-for="DeptName" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+         <div class="row row-1">
+            <div class="col-md-2">
+             <label asp-for="Description"  class="control-label"></label>
+            </div>
+            <div class="col-md-6">
+               <input asp-for="Description" disabled class="form-control" />
+               <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+      </form>
+      <hr />
+    </div>
+   </div>
+</div>
+
+
+
+
