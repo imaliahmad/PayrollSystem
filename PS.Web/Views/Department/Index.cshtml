@@ -1,0 +1,53 @@
+﻿@model IEnumerable<PS.BOL.Department>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/department/department-list.css" rel="stylesheet"/>
+
+<div class="container">
+    <br />
+    @if(TempData["ErrorMessage"] != null)
+    {
+       <div class="alert alert-danger">
+          @TempData["ErrorMessage"]
+       </div>
+    }
+<h1 class="text-center">Department's List</h1>
+<p>
+    <a asp-action="CreateorEdit" class="create-btn">Create New</a>
+</p>
+
+ <table class="table table-bordered table-hover table-striped">
+       <thead>
+           <tr>
+               <th>
+                    @Html.DisplayNameFor(model => model.DeptName)
+               </th>
+               <th>
+                    @Html.DisplayNameFor(model => model.Description)
+               </th>
+               <th>Actions</th>
+           </tr>
+       </thead>
+       <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.DeptName)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <a asp-action="CreateorEdit" class="color" asp-route-id="@item.DeptId">Edit |</a>
+                        <a asp-action="Details"  class="color"   asp-route-id="@item.DeptId">Details</a>
+                    </td>
+                </tr>
+            }
+       </tbody>
+ </table>
+
+
+</div>
