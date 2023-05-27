@@ -22,5 +22,8 @@ namespace PS.DAL.Data
         public DbSet<Leave> Leave { get; set; }
         public DbSet<Salary> Salary { get; set; }
         public DbSet<Attendence> Attendence { get; set; }
+        public DbSet<Category> Category { get; set; }
+        public DbSet<Product> Product { get; set; }
+        public DbSet<Brands> Brands { get; set; }
     }
 }
