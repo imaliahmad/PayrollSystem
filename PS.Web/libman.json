@@ -38,6 +38,22 @@
         "notyf.min.js",
         "notyf.min.css"
       ]
+    },
+    {
+      "library": "font-awesome@6.4.0",
+      "destination": "wwwroot/font-awesome/",
+      "files": [
+        "css/all.min.css",
+        "webfonts/fa-brands-400.ttf",
+        "webfonts/fa-brands-400.woff2",
+        "webfonts/fa-regular-400.ttf",
+        "webfonts/fa-regular-400.woff2",
+        "webfonts/fa-solid-900.ttf",
+        "webfonts/fa-solid-900.woff2",
+        "webfonts/fa-v4compatibility.ttf",
+        "webfonts/fa-v4compatibility.woff2",
+        "js/all.min.js"
+      ]
     }
   ]
 }

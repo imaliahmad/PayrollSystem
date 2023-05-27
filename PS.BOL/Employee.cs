@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace PS.BOL
 {
     [Table("Employee")]
@@ -18,7 +19,7 @@ namespace PS.BOL
         [Required(ErrorMessage = "Employee Name is required")]
         public string Name { get; set; }
         public string Code { get; set; }
-        public int PhoneNo { get; set; }
+        public string PhoneNo { get; set; }
 
         [ForeignKey("Department")]
 
@@ -26,5 +27,8 @@ namespace PS.BOL
 
         public int DeptId { get; set; }
         public virtual Department? Department { get; set; }
+        
+        //[NotMapped]
+        //public SelectList? DepartmentList { get; set; }
     }
 }

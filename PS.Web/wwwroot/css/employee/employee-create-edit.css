@@ -16,25 +16,29 @@
 .btn-primary {
     background: #008080;
     border: none;
-    margin-left:170px;
+    margin-left: 170px;
 }
 
 .btn-primary:hover {
     background: #008080;
     border: none;
 }
+
 .btn-success {
     background: #008080;
-    color:#fff;
+    color: #fff;
 }
+
 .btn-success:hover {
     background: #008080;
     color: #fff;
 }
+
 .btn-success:active {
     background: #008080;
     color: #fff;
 }
+
 .one {
     color: #008080;
 }

@@ -1,0 +1,80 @@
+﻿
+@model PS.BOL.Employee
+@{
+    ViewData["Title"] = "CreateorEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/js/site.js"></script>
+
+<link href="~/css/employee/employee-create-edit.css" rel="stylesheet"/>
+
+@if (TempData["ErrorMessage"] != null)
+{
+           <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+           </div>
+}
+  <h1 class="one">Employee Detail</h1>
+    <div>
+        <script>
+           function goBack() {
+              window.location.href='/Employee';
+           }
+        </script>
+       <span class="fa-sharp fa-solid fa-circle-arrow-left"></span>
+    </div>
+    <br />
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+        <form asp-action="CreateorEdit">
+          <input type="hidden" asp-for="EmpId" />
+          <div class="row row-1">
+            <div class="col-md-2">
+              <label asp-for="Name" class="control-label"></label>
+            </div>
+            <div class="col-md-6">
+              <input asp-for="Name" disabled class="form-control" />
+              <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+          </div>
+          <br />
+          <div class = "row row-1">
+            <div class="col-md-2">
+              <label asp-for="DeptId" class="control-label"></label>
+            </div>
+            <div class="col-md-6">
+              <select asp-for="DeptId" disabled class="form-control" asp-items="ViewBag.DepartmentList">
+                 <option> ---  Select --- </option>
+              </select>
+            </div>
+          </div>
+          <br />
+          <div class="row row-1">
+            <div class="col-md-2">
+              <label asp-for="Code" class="control-label"></label>
+            </div>
+            <div class="col-md-6">
+              <input asp-for="Code" disabled class="form-control" />
+              <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+          </div>
+          <br />
+          <div class="row row-1">
+            <div class="col-md-2">
+              <label asp-for="PhoneNo" class="control-label"></label>
+            </div>
+            <div class="col-md-6">
+              <input asp-for="PhoneNo" disabled class="form-control" />
+              <span asp-validation-for="PhoneNo" class="text-danger"></span>
+            </div>
+          </div>
+          <br />
+        </form> 
+        <hr />
+        </div>
+    </div>
+  </div>
+
+
+

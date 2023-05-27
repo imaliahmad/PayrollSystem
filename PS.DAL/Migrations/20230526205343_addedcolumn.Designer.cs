@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PS.DAL.Data;
 
@@ -11,9 +12,10 @@ using PS.DAL.Data;
 namespace PS.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230526205343_addedcolumn")]
+    partial class addedcolumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,70 +45,6 @@ namespace PS.DAL.Migrations
                     b.HasKey("AttId");
 
                     b.ToTable("Attendence");
-                });
-
-            modelBuilder.Entity("PS.BOL.Brands", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Brands");
-                });
-
-            modelBuilder.Entity("PS.BOL.Category", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categorys");
                 });
 
             modelBuilder.Entity("PS.BOL.Department", b =>
@@ -142,6 +80,9 @@ namespace PS.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DepartmentDeptId")
+                        .HasColumnType("int");
+
                     b.Property<int>("DeptId")
                         .HasColumnType("int");
 
@@ -155,7 +96,7 @@ namespace PS.DAL.Migrations
 
                     b.HasKey("EmpId");
 
-                    b.HasIndex("DeptId");
+                    b.HasIndex("DepartmentDeptId");
 
                     b.ToTable("Employee");
                 });
@@ -185,46 +126,6 @@ namespace PS.DAL.Migrations
                     b.ToTable("Leave");
                 });
 
-            modelBuilder.Entity("PS.BOL.Product", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BrandId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BrandId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Products");
-                });
-
             modelBuilder.Entity("PS.BOL.Salary", b =>
                 {
                     b.Property<int>("SId")
@@ -252,13 +153,9 @@ namespace PS.DAL.Migrations
 
             modelBuilder.Entity("PS.BOL.Employee", b =>
                 {
-                    b.HasOne("PS.BOL.Department", "Department")
+                    b.HasOne("PS.BOL.Department", null)
                         .WithMany("Employee")
-                        .HasForeignKey("DeptId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
+                        .HasForeignKey("DepartmentDeptId");
                 });
 
             modelBuilder.Entity("PS.BOL.Leave", b =>
@@ -272,25 +169,6 @@ namespace PS.DAL.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("PS.BOL.Product", b =>
-                {
-                    b.HasOne("PS.BOL.Brands", "Brand")
-                        .WithMany("Products")
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PS.BOL.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Brand");
-
-                    b.Navigation("Category");
-                });
-
             modelBuilder.Entity("PS.BOL.Salary", b =>
                 {
                     b.HasOne("PS.BOL.Employee", "Employee")
@@ -300,16 +178,6 @@ namespace PS.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("PS.BOL.Brands", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("PS.BOL.Category", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("PS.BOL.Department", b =>
