@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PS.DAL.Data;
 
@@ -11,9 +12,10 @@ using PS.DAL.Data;
 namespace PS.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230526201747_updateDepartmentModel")]
+    partial class updateDepartmentModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,6 +80,9 @@ namespace PS.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DepartmentDeptId")
+                        .HasColumnType("int");
+
                     b.Property<int>("DeptId")
                         .HasColumnType("int");
 
@@ -91,7 +96,7 @@ namespace PS.DAL.Migrations
 
                     b.HasKey("EmpId");
 
-                    b.HasIndex("DeptId");
+                    b.HasIndex("DepartmentDeptId");
 
                     b.ToTable("Employee");
                 });
@@ -148,13 +153,9 @@ namespace PS.DAL.Migrations
 
             modelBuilder.Entity("PS.BOL.Employee", b =>
                 {
-                    b.HasOne("PS.BOL.Department", "Department")
+                    b.HasOne("PS.BOL.Department", null)
                         .WithMany("Employee")
-                        .HasForeignKey("DeptId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
+                        .HasForeignKey("DepartmentDeptId");
                 });
 
             modelBuilder.Entity("PS.BOL.Leave", b =>
