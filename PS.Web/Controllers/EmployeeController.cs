@@ -105,6 +105,7 @@ namespace PS.Web.Controllers
                     obj = objemployeeBs.GetById(id);
                    
                 }
+                ViewBag.DepartmentList = new SelectList(departmentBs.GetAll(), "DeptId", "DeptName");
                 return View(obj);
             }
             catch (Exception ex)
