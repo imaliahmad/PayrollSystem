@@ -10,11 +10,14 @@ builder.Services.AddControllersWithViews();
 #region DALRegion
 builder.Services.AddTransient<IDepartmentDb, DepartmentDb>();
 builder.Services.AddTransient<IEmployeeDb, EmployeeDb>();
+builder.Services.AddTransient<IAttendenceDb, AttendenceDb>();
 #endregion
 
 #region BLLRegion
 builder.Services.AddTransient<IDepartmentBs, DepartmentBs>();
 builder.Services.AddTransient<IEmployeeBs, EmployeeBs>();
+builder.Services.AddTransient<IAttendenceBs, AttendenceBs>();
+
 #endregion
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlServer(@"Server=MEHROZQAZI-PC\SQLEXPRESS;Database=PayrollSystemA;Trusted_Connection=True"));

@@ -23,7 +23,7 @@ namespace PS.Web.Controllers
         {
             try
             {
-                var list = objemployeeBs.GetAll().ToList();
+                var list = objemployeeBs.GetAll();
                 return View(list);
             }
             catch (Exception ex)
@@ -66,7 +66,10 @@ namespace PS.Web.Controllers
         {
             try
             {
-                if(ModelState.IsValid)
+                ModelState.Remove("Attendence");
+                ModelState.Remove("Salary");
+                ModelState.Remove("Leave");
+                if (ModelState.IsValid)
                 {
                     if(model.EmpId > 0)
                     {

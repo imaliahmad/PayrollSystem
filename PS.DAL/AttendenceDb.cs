@@ -1,4 +1,5 @@
-﻿using PS.BOL;
+﻿using Microsoft.EntityFrameworkCore;
+using PS.BOL;
 using PS.DAL.Data;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,21 @@ namespace PS.DAL
         }
         public IEnumerable<Attendence> GetAll()
         {
-            return context.Attendence;
+            var list = context.Attendence
+                       .Include(e => e.Employee)
+                       .Select(x => new Attendence()
+                       {
+                         AttId = x.AttId,
+                         EmpId = x.EmpId,
+                         Employee = x.Employee,
+                         Date = x.Date,
+                         Batch = x.Batch,
+                         Section = x.Section,
+                         Lecture = x.Lecture,
+                         Status = x.Status,
+
+                       }).ToList();
+            return list;
         }
         public Attendence GetById(int id)
         {
