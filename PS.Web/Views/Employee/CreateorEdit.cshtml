@@ -19,16 +19,12 @@
         if (Model.EmpId > 0) titleText = "Edit Employee";
         else titleText = "Create Employee";
      }
+    <br />
     <h1 class="one">@titleText</h1>
     <br />
-    <div>
-        <script>
-           function goBack() {
-              window.location.href='/Employee';
-           }
-        </script>
-      <i class="fa-sharp fa-solid fa-circle-arrow-left"></i>
-    </div>
+    <a href="/Employee" class="btn btn-success">
+      Go Back
+    </a>
     <br />
     <hr />
     <div class="row">

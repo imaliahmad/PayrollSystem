@@ -33,7 +33,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.PhoneNo)
                 </th>
-                
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -52,10 +52,10 @@
                     <td>
                       @Html.DisplayFor(modelItem => item.PhoneNo)
                     </td>
-                   <td>
-                       <a asp-action="CreateorEdit" class="color" asp-route-id="@item.EmpId">Edit |</a>
-                       <a asp-action="Details" class="color" asp-route-id="@item.EmpId">Details </a>
-                   </td>
+                    <td>
+                        <a asp-action="CreateorEdit" class="color" asp-route-id="@item.EmpId">Edit |</a>
+                        <a asp-action="Details" class="color" asp-route-id="@item.EmpId">Details </a>
+                    </td>
                 </tr>
             }
             
