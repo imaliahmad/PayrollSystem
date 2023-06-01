@@ -19,6 +19,7 @@ namespace PS.BOL
         public DateTime LeaveDate { get; set; }
 
         [ForeignKey("Employee")]
+
         [DisplayName("Employee")]
 
         public int EmpId { get; set; }

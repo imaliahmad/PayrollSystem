@@ -1,0 +1,96 @@
+﻿
+@model PS.BOL.Attendence
+@{
+    ViewData["Title"] = "CreateorEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/attendence/attendence-create-edit.css" rel="stylesheet"/>
+<div class="container">
+   <br />
+    <h1 class="one">Attendence Detail</h1>
+    <br />
+    <a href="/Attendence" class="btn btn-success">
+      Go Back
+    </a>
+    <br />
+    <br />
+    <hr />
+    <div class="row">
+      <div class="col-md-4">
+        <form asp-action="CreateorEdit">
+          <input type="hidden" asp-for="AttId" />
+          <div class="row row-1">
+           <div class="col-md-2">
+             <label asp-for="EmpId" class="control-label"></label>
+           </div>
+           <div class="col-md-6">
+            <select asp-for="EmpId" class="form-control" disabled asp-items="ViewBag.EmployeeList">
+              <option> ---Select--- </option>
+            </select>
+           </div>
+          </div>
+          <br />
+          <div class="row row-1">
+            <div class="col-md-2">
+            <label asp-for="Date" class="control-label"></label>
+            </div>
+            <div class="col-md-6">
+            <input  asp-for="Date" id="datetime" disabled class="form-control" />
+            <span asp-validation-for="Date"  class="text-danger"></span>
+            <script>
+                var datetimeInput = document.getElementById("datetime");
+                var datetimeValue = '@Model.Date.ToString("yyyy-MM-ddTHH:mm")'; 
+                datetimeInput.value = datetimeValue;
+            </script>
+            </div>
+          </div>
+           <br />
+           <div class="row row-1">
+              <div class="col-md-2">
+                 <label asp-for="Batch" class="control-label"></label>
+              </div>
+              <div class="col-md-6">
+                <select asp-for="Batch" class="form-control" disabled asp-items="ViewBag.BatchList">
+                  <option> ---Select--- </option>
+                </select>
+              </div>
+           </div>
+           <br />
+           <div class="row row-1">
+              <div class="col-md-2">
+                 <label asp-for="Section" class="control-label"></label>
+              </div>
+              <div class="col-md-6">
+                <select asp-for="Section" class="form-control" disabled asp-items="ViewBag.SectionList">
+                  <option> ---Select--- </option>
+                </select>
+              </div>
+           </div>
+           <br />
+           <div class="row row-1">
+              <div class="col-md-2">
+                 <label asp-for="Lecture" class="control-label"></label>
+              </div>
+              <div class="col-md-6">
+                <select asp-for="Lecture" class="form-control" disabled asp-items="ViewBag.LectureList">
+                  <option> ---Select--- </option>
+                </select>
+              </div>
+           </div>
+           <br />
+           <div class="row row-1">
+              <div class="col-md-2">
+                 <label asp-for="Status" class="control-label"></label>
+              </div>
+              <div class="col-md-6">
+                <select asp-for="Status" class="form-control" disabled asp-items="ViewBag.StatusList">
+                  <option> ---Select--- </option>
+                </select>
+              </div>
+           </div>
+        </form>
+        <hr />
+      </div>
+    </div>
+</div>
+

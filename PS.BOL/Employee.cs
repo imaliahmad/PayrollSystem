@@ -27,8 +27,10 @@ namespace PS.BOL
 
         public int DeptId { get; set; }
         public virtual Department? Department { get; set; }
-        
-        //[NotMapped]
-        //public SelectList? DepartmentList { get; set; }
+
+        public virtual IEnumerable<Attendence> Attendence { get; set; }
+        public virtual IEnumerable<Leave> Leave { get; set; }
+        public virtual IEnumerable<Salary> Salary { get; set; }
+
     }
 }

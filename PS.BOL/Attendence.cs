@@ -6,6 +6,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.ComponentModel.Design;
+using PS.BOL.DataTypes;
+using System.Web.Mvc;
 
 namespace PS.BOL
 {
@@ -17,14 +21,18 @@ namespace PS.BOL
 
         [Required(ErrorMessage = "Attendence Date is required")]
         public DateTime Date { get; set; }
-        public string Status { get; set; }
-        //public int CheckStatus { get; set; }
-
+        public BatchTypes?  Batch { get; set; }
+        public SectionTypes? Section { get; set; }
+        public LectureTypes? Lecture { get; set; }
+        public StatusTypes? Status { get; set; }
 
         [ForeignKey("Employee")]
 
         [DisplayName("Employee")]
 
         public int EmpId { get; set; }
+        public virtual Employee? Employee { get; set; }
+
+        
     }
 }
