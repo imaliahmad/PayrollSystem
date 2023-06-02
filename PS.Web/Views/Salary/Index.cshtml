@@ -1,0 +1,75 @@
+﻿
+@using PS.BOL.DataTypes
+@model IEnumerable<PS.BOL.Salary>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/salary/salary-list.css" rel="stylesheet" />
+<div class="container">
+    <br />
+    @if (TempData["ErrorMessage"] != null)
+    {
+          <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+          </div>
+    }
+    <h1 class="one">Salary's List</h1>
+    <br />
+    <p>
+        <a asp-action="CreateorEdit" class="create-btn">Create New</a>
+    </p>
+   <table class="table table-bordered table-hover table-striped">
+       <thead>
+           <tr>
+               <th>
+                   Employee Name
+               </th>
+               <th>
+                    @Html.DisplayNameFor(model => model.Date)
+               </th>
+               <th>
+                    @Html.DisplayNameFor(model => model.Status)
+               </th>
+               <th>Actions</th>
+           </tr>
+       </thead>
+       <tbody>
+           @foreach(var item in Model)
+           {
+               <tr>
+                   <td>
+                       @Html.DisplayFor(modelItem => item.Employee.Name)
+                   </td>
+                   <td>
+                       @Html.DisplayFor(modelItem => item.Date)
+                   </td>
+                   <td>
+                        @if (item.Status == null)
+                        {
+                           <span class="text-warning" style="font-weight:bold;">Pending</span>
+                        }
+                        @if (item.Status == SalaryTypes.Pending)
+                        {
+                           <span class="text-warning" style="font-weight:bold;">Pending</span>
+                        }
+                        else if (item.Status == SalaryTypes.Collected)
+                        {
+                           <span class="text-success" style="font-weight:bold;">Collected</span>
+                        }
+                        else if (item.Status ==SalaryTypes.Deposited)
+                        {
+                           <span class="text-info" style="font-weight:bold;">Deposited</span>
+                        }
+                   </td>
+                   <td>
+                       <a asp-action="CreateorEdit" class="color" asp-route-id="@item.SId">Edit |</a>
+                       <a asp-action="Details" class="color" asp-route-id="@item.SId">Details</a>
+                   </td>
+               </tr>
+           }
+       </tbody>
+   </table>
+
+</div>
+

@@ -1,4 +1,5 @@
-﻿using PS.BOL;
+﻿using Microsoft.EntityFrameworkCore;
+using PS.BOL;
 using PS.DAL.Data;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,18 @@ namespace PS.DAL
         }
         public IEnumerable<Salary> GetAll()
         {
-            return context.Salary;
+            var list = context.Salary
+                         .Include(e => e.Employee)
+                         .Select(x => new Salary()
+                         {
+                             SId = x.SId,
+                             EmpId = x.EmpId,
+                             Employee = x.Employee,
+                             Date = x.Date,
+                             Status = x.Status,
+
+                         }).ToList();
+            return list;
         }
         public Salary GetById(int id)
         {
