@@ -1,0 +1,112 @@
+﻿@model PS.BOL.Salary
+@{
+    ViewData["Title"] = "CreateorEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/js/site.js"></script>
+
+<link href="~/css/salary/salary-create-edit.css" rel="stylesheet"/>
+@if (TempData["ErrorMessage"] != null)
+{
+      <div class="alert alert-danger">
+        @TempData["ErrorMessage"] 
+      </div>
+}
+<div class="container">
+    <br />
+    @{
+        string titleText = string.Empty;
+        if (Model.SId > 0) titleText = "Edit Salary";
+        else titleText = "Create Salary";
+     }
+     <h1 class="one">@titleText</h1>
+     <br />
+     <a href="/Salary" class="btn btn-success">
+       Go Back
+     </a>
+     <br />
+     <hr />
+     <div class="row">
+       <div class="col-md-4">
+         <form asp-action="CreateorEdit">
+           <input type="hidden" asp-for="SId" />
+           <div class="row row-1">
+             <div class="col-md-2">
+               <label asp-for="EmpId"class="control-label"></label>
+             </div>
+             <div class="col-md-6">
+               <select asp-for="EmpId" class="form-control" asp-items="ViewBag.EmployeeList">
+                  <option> ---Select--- </option>
+               </select>
+             </div>
+           </div>
+           <br />
+           @if(Model.SId > 0)
+           {
+                <div class="row row-1">
+                  <div class="col-md-2">
+                    <label asp-for="Date" class="control-label"></label>
+                  </div>
+                  <div class="col-md-6">
+                    <input  asp-for="Date" id="datetime"  class="form-control" />
+                    <span asp-validation-for="Date"  class="text-danger"></span>
+                   <script>
+                        var datetimeInput = document.getElementById("datetime");
+                        var datetimeValue = '@Model.Date.ToString("yyyy-MM-ddTHH:mm")'; 
+                        datetimeInput.value = datetimeValue;
+                   </script>
+                  </div>
+                </div>
+           }
+           else
+           {
+                <div class="row row-1">
+                  <div class="col-md-2">
+                    <label asp-for="Date" class="control-label"></label>
+                  </div>
+                  <div class="col-md-6">
+                    <input  asp-for="Date" id="datetime"  class="form-control" />
+                    <span asp-validation-for="Date"  class="text-danger"></span>
+                    <script>
+                        var datetimeInput = document.getElementById("datetime");
+                        var now = new Date();
+                        var currentDateTime = now.toISOString().slice(0, 20).replace('T', ' ');
+                        datetimeInput.value = currentDateTime;
+                    </script>
+                  </div>
+                </div>
+           }
+           <br />
+           @if(Model.SId > 0)
+           {
+               <div class="row row-1">
+                 <div class="col-md-2">
+                   <label asp-for="Status" class="control-label"></label>
+                 </div>
+                 <div class="col-md-6">
+                   <select asp-for="Status" class="form-control" asp-items="ViewBag.SalaryStatusList">
+                      <option> ---Select--- </option>
+                   </select>
+                 </div>
+               </div>
+           }
+           <br />
+                @{
+                    string buttonText = string.Empty;
+                    if (Model.SId > 0) buttonText = "Update";
+                    else buttonText = "Create";
+                }
+            <button type="submit" id="btnSave" class="btn btn-primary">@buttonText</button>
+         </form>
+         <hr />
+       </div>
+     </div>
+</div>
+<script>
+    $(document).ready(function () {
+    $('#btnSave').click(function() {
+        notyf.open ({ type:'success', message:'Salary is saved.' });
+    });
+    });
+</script>
+

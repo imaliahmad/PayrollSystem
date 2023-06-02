@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PS.BOL.DataTypes;
 
 namespace PS.BOL
 {
@@ -23,7 +24,7 @@ namespace PS.BOL
         public virtual Employee? Employee { get; set; }
 
         public DateTime Date { get; set; }
-        public string Status { get; set; }
+        public SalaryTypes? Status { get; set; }
 
     }
 }
