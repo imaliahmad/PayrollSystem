@@ -1,4 +1,5 @@
-﻿using PS.BOL;
+﻿using Microsoft.EntityFrameworkCore;
+using PS.BOL;
 using PS.DAL.Data;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,18 @@ namespace PS.DAL
         }
         public IEnumerable<Leave> GetAll()
         {
-            return context.Leave;
+            var list = context.Leave
+                        .Include(e => e.Employee)
+                        .Select(x => new Leave()
+                        {
+                            LeaveId = x.LeaveId,
+                            EmpId = x.EmpId,
+                            Employee = x.Employee,
+                            LeaveDate = x.LeaveDate,
+                            Status = x.Status,
+
+                        }).ToList();
+            return list;
         }
         public Leave GetById(int id)
         {
