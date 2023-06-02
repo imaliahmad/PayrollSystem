@@ -11,12 +11,14 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IDepartmentDb, DepartmentDb>();
 builder.Services.AddTransient<IEmployeeDb, EmployeeDb>();
 builder.Services.AddTransient<IAttendenceDb, AttendenceDb>();
+builder.Services.AddTransient<ILeaveDb, LeaveDb>();
 #endregion
 
 #region BLLRegion
 builder.Services.AddTransient<IDepartmentBs, DepartmentBs>();
 builder.Services.AddTransient<IEmployeeBs, EmployeeBs>();
 builder.Services.AddTransient<IAttendenceBs, AttendenceBs>();
+builder.Services.AddTransient<ILeaveBs,LeaveBs>();
 
 #endregion
 builder.Services.AddDbContext<AppDbContext>(

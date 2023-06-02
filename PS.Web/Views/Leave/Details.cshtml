@@ -1,0 +1,63 @@
+﻿@model PS.BOL.Leave
+@{
+    ViewData["Title"] = "CreateorEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/leave/leave-create-edit.css" rel="stylesheet"/>
+<div class="container">
+    <h1 class="one">Detail Leave</h1>
+    <br />
+    <a href="/Leave" class="btn btn-success">
+      Go Back
+    </a>
+    <br />
+    <br />
+    <hr />
+    <div class="row">
+      <div class="col-md-4">
+         <form asp-action="CreateorEdit">
+           <input type="hidden" asp-for="LeaveId" />
+           <div class="row row-1">
+            <div class="col-md-2">
+              <label asp-for="EmpId" class="control-label"></label>
+            </div>
+            <div class="col-md-6">
+                <select asp-for="EmpId" class="form-control" disabled asp-items="ViewBag.EmployeeList">
+                  <option> ---Select--- </option>
+                </select>
+            </div>
+           </div>
+           <br />
+            <div class="row row-1">
+              <div class="col-md-2">
+                <label asp-for="LeaveDate" class="control-label"></label>
+                </div>
+                <div class="col-md-6">
+                <input  asp-for="LeaveDate" id="datetime" disabled class="form-control" />
+                <span asp-validation-for="LeaveDate"  class="text-danger"></span>
+                <script>
+                    var datetimeInput = document.getElementById("datetime");
+                    var datetimeValue = '@Model.LeaveDate.ToString("yyyy-MM-ddTHH:mm")'; 
+                    datetimeInput.value = datetimeValue;
+                </script>
+              </div>
+            </div>
+            <br />
+            @if (Model.LeaveId > 0)
+            {
+                <div class="row row-1">
+                <div class="col-md-2">
+                    <label asp-for="Status" class="control-label"></label>
+                </div>
+                <div class="col-md-6">
+                    <select asp-for="Status" class="form-control" disabled asp-items="ViewBag.LeaveStatusList">
+                        <option> ---Select--- </option>
+                    </select>
+                </div>
+                </div>
+            }
+         </form>
+         <hr />
+      </div>
+    </div>
+</div>

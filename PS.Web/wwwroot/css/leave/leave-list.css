@@ -1,0 +1,25 @@
+﻿body {
+}
+.create-btn {
+    text-decoration: none;
+    color: #008080;
+    font-weight: bold;
+}
+.create-btn:hover {
+    text-decoration: none;
+    color: #008080;
+    font-weight: bold;
+}
+.color {
+    color: #008080;
+    text-decoration: none;
+}
+.color:hover {
+    color: #008080;
+    text-decoration: none;
+}
+.one {
+    color: #008080;
+}
+
+

@@ -1,0 +1,114 @@
+﻿@model PS.BOL.Leave
+@{
+    ViewData["Title"] = "CreateorEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/js/site.js"></script>
+
+<link href="~/css/leave/leave-create-edit.css" rel="stylesheet"/>
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"] 
+    </div>
+}
+<div class="container">
+    <br />
+    @{
+        string titleText = string.Empty;
+        if (Model.LeaveId > 0) titleText = "Edit Leave";
+        else titleText = "Create Leave";
+    }
+    <h1 class="one">@titleText</h1>
+    <br />
+    <a href="/Leave" class="btn btn-success">
+      Go Back
+    </a>
+    <br />
+    <br />
+    <hr />
+    <div class="row">
+      <div class="col-md-4">
+         <form asp-action="CreateorEdit">
+           <input type="hidden" asp-for="LeaveId" />
+           <div class="row row-1">
+            <div class="col-md-2">
+              <label asp-for="EmpId" class="control-label"></label>
+            </div>
+            <div class="col-md-6">
+                <select asp-for="EmpId" class="form-control" asp-items="ViewBag.EmployeeList">
+                  <option> ---Select--- </option>
+                </select>
+            </div>
+           </div>
+           <br />
+                @if (Model.LeaveId > 0)
+                {
+                    <div class="row row-1">
+                         <div class="col-md-2">
+                            <label asp-for="LeaveDate" class="control-label"></label>
+                         </div>
+                         <div class="col-md-6">
+                          <input  asp-for="LeaveDate" id="datetime"  class="form-control" />
+                          <span asp-validation-for="LeaveDate"  class="text-danger"></span>
+                           <script>
+                                var datetimeInput = document.getElementById("datetime");
+                                var datetimeValue = '@Model.LeaveDate.ToString("yyyy-MM-ddTHH:mm")'; 
+                                datetimeInput.value = datetimeValue;
+                           </script>
+                         </div>
+                    </div>
+                }
+                else
+                {
+                  <div class="row row-1">
+                     <div class="col-md-2">
+                        <label asp-for="LeaveDate" class="control-label"></label>
+                     </div>
+                     <div class="col-md-6">
+                      <input  asp-for="LeaveDate" id="datetime"  class="form-control" />
+                      <span asp-validation-for="LeaveDate"  class="text-danger"></span>
+                       <script>
+                            var datetimeInput = document.getElementById("datetime");
+                            var now = new Date();
+                            var currentDateTime = now.toISOString().slice(0, 20).replace('T', ' ');
+                            datetimeInput.value = currentDateTime;
+                       </script>
+                     </div>
+                  </div>
+                }
+           <br />
+           @if(Model.LeaveId > 0)
+           {
+               <div class="row row-1">
+                <div class="col-md-2">
+                  <label asp-for="Status" class="control-label"></label>
+                </div>
+                <div class="col-md-6">
+                    <select asp-for="Status" class="form-control" asp-items="ViewBag.LeaveStatusList">
+                      <option> ---Select--- </option>
+                    </select>
+                </div>
+               </div>
+           }
+           
+           <br />
+                @{
+                    string buttonText = string.Empty;
+                    if (Model.LeaveId > 0) buttonText = "Update";
+                    else buttonText = "Create";
+                }
+                <button type="submit" id="btnSave" class="btn btn-primary">@buttonText</button>
+         </form>
+         <hr />
+      </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+    $('#btnSave').click(function() {
+        notyf.open ({ type:'success', message:'Leave is saved.' });
+    });
+    });
+</script>
+

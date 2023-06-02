@@ -1,0 +1,73 @@
+﻿@using PS.BOL.DataTypes
+@model IEnumerable<PS.BOL.Leave>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/leave/leave-list.css" rel="stylesheet" />
+<div class="container">
+     <br />
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+          @TempData["ErrorMessage"]
+        </div>
+    }
+    <h1 class="one">Leave's List</h1>
+    <br />
+    <p>
+        <a asp-action="CreateorEdit" class="create-btn">Create New</a>
+    </p>
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>
+                  Employee Name
+                </th>
+                <th>
+                  @Html.DisplayNameFor(model => model.LeaveDate)
+                </th>
+                <th>
+                  @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LeaveDate)
+                    </td>
+                    <td>
+                        @if (item.Status == null)
+                        {
+                             <span class="text-warning" style="font-weight:bold;">Pending</span>
+                        }
+                        @if (item.Status == LeaveStatusTypes.Pending)
+                        {
+                             <span class="text-warning" style="font-weight:bold;">Pending</span>
+                        }
+                        else if (item.Status == LeaveStatusTypes.Approved)
+                        {
+                             <span class="text-success" style="font-weight:bold;">Approved</span>
+                        }
+                        else if (item.Status == LeaveStatusTypes.Cancelled)
+                        {
+                             <span class="text-danger" style="font-weight:bold;">Cancelled</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="CreateorEdit" class="color" asp-route-id="@item.LeaveId">Edit |</a>
+                        <a asp-action="Details" class="color" asp-route-id="@item.LeaveId">Details</a>
+                    </td>
+                </tr>
+                
+            }
+        </tbody>
+    </table>
+</div>
