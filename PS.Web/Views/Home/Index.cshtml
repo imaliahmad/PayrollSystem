@@ -5,4 +5,198 @@
 }
 
 <h1>Home Page</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="text-center">Employee's</h1>
+          <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>PhoneNo</th>
+                </tr>
+            </thead>
+            <tbody id="employeelist">
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-6">
+             <h1 class="text-center">Attendence's</h1>
+          <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>EmployeeName</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="attendencelist">
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <div class="row">
+    <div class="col-md-12">
+        <h1 class="text-center">Leave's</h1>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>EmployeeName</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="leavelist">
+            </tbody>
+        </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+        <h1 class="text-center">Salary's</h1>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>EmployeeName</th>
+                    <th>PerLectureSalary</th>
+                    <th>Tax</th>
+                    <th>TicketFee</th>
+                    <th>NetSalary</th>
+                </tr>
+            </thead>
+            <tbody id="salarylist">
+            </tbody>
+        </table>
+    </div>
+  </div>
+</div> 
+<script>
+ $(document).ready(function() {
+    loadSalary();
+    loadEmployee();
+    loadAttendence();
+    loadLeave();
 
+    function loadSalary() {
+        $.ajax({
+            url: '/Salary/GetSalary/',
+            type: 'GET',
+            success: function(result) {
+                console.log(result);
+
+                var salaryList = result.$values;
+
+                var rows = '';
+                for (var item of salaryList) {
+                    var row = '<tr>' +
+                        '<td>' + item.Name + '</td>' +
+                        '<td>' + item.PerLectureSalary + '</td>' +
+                        '<td>' + item.Tax + '</td>' +
+                        '<td>' + item.TicketFee + '</td>' +
+                        '<td>' + item.NetSalary + '</td>' +
+                        '</tr>';
+                    rows += row;
+                }
+
+                $('#salarylist').empty().append(rows);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+    
+    function loadEmployee() {
+        $.ajax({
+            url: '/Employee/GetEmployee/', 
+            type: 'GET',
+            success: function(result) {
+
+                var employee = result; 
+                $('#employeelist').empty();
+
+                var rows= '';
+                for(var item of employee) 
+                {
+                   var row = '<tr>' +
+                                '<td>' + item.name + '</td>' +
+                                '<td>' + item.code + '</td>' +
+                                '<td>' + item.phoneNo + '</td>' +
+                                '</tr>';
+                    rows += row;
+
+                }
+
+                $('#employeelist').append(rows);
+
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+    }
+
+    function loadAttendence() {
+        $.ajax({
+            url: '/Attendence/GetAttendence/', 
+            type: 'GET',
+            success: function(result) {
+
+                var attendence = result; 
+                $('#attendencelist').empty();
+
+                var rows= '';
+                for(var item of attendence) 
+                {
+                   var row = '<tr>' +
+                                '<td>' + item.employee.name + '</td>' +
+                                '<td>' + item.date + '</td>' +
+                                '<td>' + item.status + '</td>' +
+                                '</tr>';
+                    rows += row;
+
+                }
+
+                $('#attendencelist').append(rows);
+
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+    }
+
+    function loadLeave() {
+        $.ajax({
+            url: '/Leave/GetLeave/', 
+            type: 'GET',
+            success: function(result) {
+
+                var leave = result; 
+
+                $('#Leavelist').empty();
+
+                var rows= '';
+                for(var item of leave) 
+                {
+                   var row = '<tr>' +
+                                '<td>' + item.employee.name + '</td>' +
+                                '<td>' + item.leaveDate + '</td>' +
+                                '<td>' + item.status + '</td>' +
+                                '</tr>';
+                    rows += row;
+
+                }
+
+                $('#leavelist').append(rows);
+
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+    }
+ });
+
+</script>

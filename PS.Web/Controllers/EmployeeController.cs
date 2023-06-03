@@ -120,5 +120,13 @@ namespace PS.Web.Controllers
             }
            
         }
+       /** 
+        * This function is used to get employee.
+       **/
+        public JsonResult GetEmployee()
+        {
+            var employee = objemployeeBs.GetAll(); 
+            return Json(employee);
+        }
     }
 }

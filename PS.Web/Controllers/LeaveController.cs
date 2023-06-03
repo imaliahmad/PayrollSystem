@@ -116,5 +116,13 @@ namespace PS.Web.Controllers
                 return View(msg);
             }
         }
+     /** 
+      * This function is used to get leave.
+     **/
+        public JsonResult GetLeave()
+        {
+            var leave = objleaveBs.GetAll();
+            return Json(leave);
+        }
     }
 }

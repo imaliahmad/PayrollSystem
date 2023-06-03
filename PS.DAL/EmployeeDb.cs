@@ -37,6 +37,10 @@ namespace PS.DAL
                               Department= x.Department,
                               Code = x.Code,
                               PhoneNo = x.PhoneNo,
+                              Desination = x.Desination,
+                              PerLectureSalary = x.PerLectureSalary,
+                              Tax = x.Tax,
+                              TicketFee = x.TicketFee,
                           }).ToList();
 
             return list;

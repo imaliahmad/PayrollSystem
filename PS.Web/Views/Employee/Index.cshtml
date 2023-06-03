@@ -33,6 +33,18 @@
                 <th>
                     @Html.DisplayNameFor(model => model.PhoneNo)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Desination)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PerLectureSalary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tax)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TicketFee)
+                </th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -51,6 +63,18 @@
                     </td>
                     <td>
                       @Html.DisplayFor(modelItem => item.PhoneNo)
+                    </td>
+                    <td>
+                      @Html.DisplayFor(modelItem => item.Desination)
+                    </td>
+                    <td>
+                      @Html.DisplayFor(modelItem => item.PerLectureSalary)
+                    </td>
+                    <td>
+                      @Html.DisplayFor(modelItem => item.Tax)
+                    </td>
+                    <td>
+                      @Html.DisplayFor(modelItem => item.TicketFee)
                     </td>
                    <td>
                        <a asp-action="CreateorEdit" class="color" asp-route-id="@item.EmpId">Edit |</a>

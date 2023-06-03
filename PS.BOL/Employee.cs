@@ -27,7 +27,11 @@ namespace PS.BOL
 
         public int DeptId { get; set; }
         public virtual Department? Department { get; set; }
-
+        public string Desination { get; set; }
+        public decimal PerLectureSalary { get; set; }  
+        public decimal Tax { get; set; }
+        public decimal TicketFee { get; set; }
+        public decimal NetSalary { get; set; }
         public virtual IEnumerable<Attendence> Attendence { get; set; }
         public virtual IEnumerable<Leave> Leave { get; set; }
         public virtual IEnumerable<Salary> Salary { get; set; }
