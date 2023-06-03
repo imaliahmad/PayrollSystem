@@ -16,6 +16,8 @@ namespace PS.DAL
         bool Insert(Salary obj);
         bool Update(Salary obj);
         bool Delete(int id);
+        decimal GetCalculatedSalary(int id);
+        List<Employee> GetEmployee();
     }
     public class SalaryDb : ISalaryDb
     {
@@ -63,6 +65,40 @@ namespace PS.DAL
             context.SaveChanges();
             return true;
         }
+        public decimal GetCalculatedSalary(int id)
+        {
+            decimal netSalary = 0;
+            decimal grossSalary = 0;
+            decimal perlecturesalary = 0;
+            decimal taxAmt = 0;
+            decimal ticketFee = 0;
+
+            int totalPresentAttendances = context.Attendence.Where(x => x.EmpId == id &&
+                                                            x.Status == BOL.DataTypes.StatusTypes.Present)
+                                                            .ToList().Count();
+
+            var employee = context.Employee.Where(x => x.EmpId == id).FirstOrDefault();
+            if (employee != null)
+            {
+                perlecturesalary = employee.PerLectureSalary;
+                taxAmt = employee.Tax;
+                ticketFee = employee.TicketFee;
+            }
+            int totalLeaves = context.Leave.Where(x => x.EmpId == id && x.Status == 0).ToList().Count();
+
+            grossSalary = (totalPresentAttendances + totalLeaves) * perlecturesalary ;
+
+            netSalary = grossSalary - taxAmt - ticketFee;
+
+            return netSalary;
+           
+        }
+        public List<Employee> GetEmployee()
+        {
+           var employees = context.Employee.ToList();
+            return employees;
+        }
+       
     }
 }
 

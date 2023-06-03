@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using PS.BLL;
 using PS.BOL;
 using PS.BOL.DataTypes;
+using PS.DAL.Data;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace PS.Web.Controllers
 {
@@ -10,10 +13,12 @@ namespace PS.Web.Controllers
     {
         private readonly ISalaryBs objsalaryBs;
         private readonly IEmployeeBs employeeBs;
+     
         public SalaryController(ISalaryBs _objsalaryBs, IEmployeeBs _employeeBs)
         {
             objsalaryBs = _objsalaryBs;
             employeeBs = _employeeBs;
+           
         }
        /** 
         * This function is used to get salary list.
@@ -120,6 +125,24 @@ namespace PS.Web.Controllers
                 return View(msg);
 
             }
+       }
+        public JsonResult GetSalary()
+        {
+            var employeeList = objsalaryBs.GetEmployee();
+    
+            if(employeeList.Count > 0)
+            {
+                foreach (var employee in employeeList)
+                {
+                    employee.NetSalary = objsalaryBs.GetCalculatedSalary(employee.EmpId);
+   
+                }
+            }
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+            return new JsonResult(employeeList, options);
         }
     }
 }

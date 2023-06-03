@@ -15,6 +15,8 @@ namespace PS.BLL
         bool Insert(Salary obj);
         bool Update(Salary obj);
         bool Delete(int id);
+        decimal GetCalculatedSalary(int id);
+        List<Employee> GetEmployee();
     }
     public class SalaryBs : ISalaryBs
     {
@@ -42,6 +44,16 @@ namespace PS.BLL
         public bool Delete(int id)
         {
             return objDb.Delete(id);
+        }
+
+        public decimal GetCalculatedSalary(int id)
+        {
+            return objDb.GetCalculatedSalary(id);
+        }
+
+        public List<Employee> GetEmployee()
+        {
+            return objDb.GetEmployee();
         }
     }
 }

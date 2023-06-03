@@ -128,5 +128,13 @@ namespace PS.Web.Controllers
                 return View(msg);
             }
         }
+      /** 
+       * This function is used to get attendence.
+      **/
+        public JsonResult GetAttendence()
+        {
+            var attendence = objattendenceBs.GetAll();
+            return Json(attendence);
+        }
     }
 }
